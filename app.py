@@ -67,6 +67,7 @@ async def hit_next(msg_id: str, message: dict) -> aiohttp.ClientResponse:
     async with aiohttp.ClientSession(raise_for_status=True) as session:
         for attempt in range(MAX_RETRIES):
             try:
+                logger.info(f"JWONG forwarding message: {NEXT_SERVICE_URL}")
                 resp = await session.post(
                     NEXT_SERVICE_URL,
                     headers={"x-rh-identity": b64_identity},
